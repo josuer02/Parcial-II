@@ -8,6 +8,8 @@ Parcial II, Estructura de datos (BSTvsAVL)
 -Delete
 -Min
 -Max
+
+
 **#Benchmark**
 -Tiempo que inserta AVL (10000):
 
