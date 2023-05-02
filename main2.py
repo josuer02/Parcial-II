@@ -33,7 +33,6 @@ end_time=time.time()
 elapsed_time=end_time-start_time
 print('Tiempo transcurrido BST', elapsed_time)
 
-busqueda = [46, 97, 12, 88, 22, 43, 8, 5, 12, 76, 46, 97, 12, 88, 22, 43, 8, 5, 12, 76]
 times1 = []
 times2 = []
 elapsed_time1=0
