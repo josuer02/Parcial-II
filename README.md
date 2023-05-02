@@ -11,6 +11,8 @@ Parcial II, Estructura de datos (BSTvsAVL)
 
 
 **#Benchmark**
+
+
 -Tiempo que inserta AVL (10000):
 
 
