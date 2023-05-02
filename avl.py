@@ -1,4 +1,3 @@
-
 class AVLNode:
    
     def __init__(self, key):
@@ -25,11 +24,9 @@ class AVLTree:
     def _insert(self, node, key):
         """
         Inserts a new node with the given key into the AVLTree recursively.
-
         Args:
         node (AVLNode): The current AVLNode object that is being checked for insertion.
         key (int): The value of the new AVLNode object to be inserted into the AVLTree.
-
         Returns:
         AVLNode: The AVLNode object that was inserted into the AVLTree.
         """
@@ -65,10 +62,8 @@ class AVLTree:
     def search(self, key):
         """
         Searches for a node with the given key in the AVLTree object.
-
         Args:
         key (int): The value of the AVLNode object to be searched for.
-
         Returns:
         AVLNode or None: If found, the AVLNode object with the given key. Otherwise, None.
         """
@@ -77,11 +72,9 @@ class AVLTree:
     def _search(self, node, key):
         """
         Searches for a node with the given key in the AVLTree object recursively.
-
         Args:
         node (AVLNode): The current AVLNode object that is being checked for the key.
         key (int): The value of the AVLNode object to be searched for.
-
         Returns:
         AVLNode or None: If found, the AVLNode object with the given key. Otherwise, None.
         """
@@ -108,7 +101,6 @@ class AVLTree:
     def _traverse(self, node):
         """
         Helper function for traversing the AVL tree and printing the keys in order.
-
         Args:
             node: The node to start traversing from.
         """
@@ -124,7 +116,6 @@ class AVLTree:
     
         Args:
         node (AVLNode): The node for which to calculate the height.
-
         Returns:
         int: The height of the node, or 0 if the node is None.
         """
@@ -182,6 +173,109 @@ class AVLTree:
         node.height = 1 + max(self._height(node.left), self._height(node.right))
         new_root.height = 1 + max(self._height(new_root.left), self._height(new_root.right))
         return new_root
+    
+    def delete(self, key):
+        """
+        Deletes the node with the given key from the AVL tree.
+        
+        Args:
+        key (int): The key of the node to delete.
+        """
+        self.root = self._delete(self.root, key)
+
+    def _delete(self, node, key):
+        """
+        Deletes the node with the given key from the AVL tree recursively.
+        
+        Args:
+        node (AVLNode): The node to start the deletion from.
+        key (int): The key of the node to delete.
+        
+        Returns:
+        AVLNode: The new root node after deletion.
+        """
+        if node is None:
+            return None
+
+        elif key < node.key:
+            node.left = self._delete(node.left, key)
+
+        elif key > node.key:
+            node.right = self._delete(node.right, key)
+
+        else:
+
+            if node.left is None and node.right is None:
+                node = None
+
+            elif node.left is None:
+                node = node.right
+
+            elif node.right is None:
+                node = node.left
+
+            else:
+                temp_node = self._find_min(node.right)
+                node.key = temp_node.key
+                node.right = self._delete(node.right, temp_node.key)
+
+        if node is None:
+            return node
+
+        node.height = 1 + max(self._height(node.left), self._height(node.right))
+
+        balance = self._balance(node)
+
+        if balance > 1 and self._balance(node.left) >= 0:
+            return self._rotate_right(node)
+
+        if balance < -1 and self._balance(node.right) <= 0:
+            return self._rotate_left(node)
+
+        if balance > 1 and self._balance(node.left) < 0:
+            node.left = self._rotate_left(node.left)
+            return self._rotate_right(node)
+
+        if balance < -1 and self._balance(node.right) > 0:
+            node.right = self._rotate_right(node.right)
+            return self._rotate_left(node)
+
+        return node
+    
+    def _find_min(self, node):
+        """
+        Finds the node with the smallest key in a given subtree.
+        
+        Args:
+        node (AVLNode): The node to start searching from.
+        
+        Returns:
+        AVLNode: The node with the smallest key in the subtree.
+        """
+        current_node = node
+        while current_node.left is not None:
+            current_node = current_node.left
+        return current_node                                                                                                                         
+
+    def find_min(self):
+            if self.root is None:
+                return None
+            
+            node = self.root
+            while node.left is not None:
+                node = node.left
+            
+            return node.key
+
+    def find_max(self):
+            if self.root is None:
+                return None
+            
+            node = self.root
+            while node.right is not None:
+                node = node.right
+            
+            return node.key
 
 def print_avl_tree(node, level=0, prefix=""):
         """

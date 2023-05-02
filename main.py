@@ -26,3 +26,19 @@ print(Avl_tree.traverse(), "\n")
 #Visualizer
 print('\n *** Visualize tree ***\n')
 print_avl_tree(Avl_tree.root)
+
+#Delete
+print('\n * Delete node 33***\n')
+print(Avl_tree.delete(33))
+
+print('\n * Visualize tree *\n')
+print_avl_tree(Avl_tree.root)
+print(Avl_tree.traverse(), "\n")
+
+print('\n * Find min *\n')
+print(Avl_tree.find_min())
+
+print('\n * Find max *\n')
+print(Avl_tree.find_max())
+
+print('Current root: {}'.format(Avl_tree.root)) # current root
