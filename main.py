@@ -2,67 +2,32 @@
 from binary_search_tree import BinarySearchTree
 from avl import AVLTree, print_avl_tree
 import time, matplotlib.pyplot as plt
+import random,sys
+
 Avl_tree = AVLTree()
-
-#Funcion de insertar
-print('\n*** Inserting Nodes in Tree ***\n')
-nodes_values = [33, 77, 4, 11, 16, 55, 5, 1, 14, 63]
-for value in nodes_values:
-    print('Inserting node with value: {}'.format(value))
-    Avl_tree.insert(value)
-
-print('Current root: {}'.format(Avl_tree.root)) # current root
-
-
-# Funcion de buscar
-print('\n*** Searching keys in Tree ***\n')
-Avl_tree.search(10)
-
-# Funcion de traverse
-print('\n*** Traversing Tree ***\n')
-
-print(Avl_tree.traverse(), "\n")
-
-#Visualizer
-print('\n *** Visualize tree ***\n')
-print_avl_tree(Avl_tree.root)
-
-#Delete
-print('\n * Delete node 33***\n')
-print(Avl_tree.delete(33))
-
-print('\n * Visualize tree *\n')
-print_avl_tree(Avl_tree.root)
-print(Avl_tree.traverse(), "\n")
-
-#Minimo
-print('\n * Find min *\n')
-print(Avl_tree.find_min())
-
-#Maximo
-print('\n * Find max *\n')
-print(Avl_tree.find_max())
-
 
 #AVL tree
 start_time=time.time()
 AVL_tree1 = AVLTree()
 print('\n*** Inserting Nodes in Tree ***\n')
-nodes_values = [46, 97, 12, 5, 8, 13, 43, 88, 22, 76]
-for value in nodes_values:
+nodes_values1 = set(random.sample(range(1, 10001), 10000))
+for value in nodes_values1:
     print('Inserting node with value: {}'.format(value))
     AVL_tree1.insert(value)
 end_time=time.time()
 elapsed_time=end_time-start_time
 print('Tiempo transcurrido AVL', elapsed_time)
+size=sys.getsizeof(AVL_tree1)
+print(f"Tamaño del objeto tree: {size:.2f} Bytes")
 
 #BST tree
 start_time=time.time()
 BST_tree = BinarySearchTree()
 print('\n*** Inserting Nodes in Tree ***\n')
-nodes_values = [46, 97, 12, 5, 8, 13, 43, 88, 22, 76]
+nodes_values = nodes_values1.copy()
 for value in nodes_values:
     print('Inserting node with value: {}'.format(value))
+    sys.setrecursionlimit(10000000)
     BST_tree.insert(value)
 end_time=time.time()
 elapsed_time=end_time-start_time
@@ -73,7 +38,7 @@ times1 = []
 times2 = []
 elapsed_time1=0
 elapsed_time2=0
-for i in busqueda:
+for i in range(10001):
     # Medir el tiempo de ejecución de la primera implementación
     start_time = time.time()
     AVL_tree1.search(i)
