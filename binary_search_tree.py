@@ -114,6 +114,7 @@ class BinarySearchTree:
             bool: True if a node with the given key exists in the tree, False otherwise.
         """
         if key == subtree.data:
+            print("Valor encontrado: ", subtree.data)
             return True
         
         elif (key < subtree.data) and (subtree.left_child is not None):

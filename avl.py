@@ -174,6 +174,7 @@ class AVLTree:
         new_root.height = 1 + max(self._height(new_root.left), self._height(new_root.right))
         return new_root
     
+    
     def delete(self, key):
         """
         Deletes the node with the given key from the AVL tree.
